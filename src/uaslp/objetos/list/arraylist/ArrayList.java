@@ -1,20 +1,24 @@
 package uaslp.objetos.list.arraylist;
 
 
+
+import uaslp.objetos.list.List;
+
+
 import java.util.Objects;
 
-public class ArrayList {
+public class ArrayList <T> implements List<T>{
 
     public static final int INITIAL_SIZE=2;
-    private String [] array;
+    private T [] array;
     private int size;
 
 
     public ArrayList() {
-        array = new String[INITIAL_SIZE];
+        array = (T[])(new Object[INITIAL_SIZE]);
     }
 
-    public void addAtTail(String data){
+    public void addAtTail(T data){
         if(size == array.length){
             increaseSize();
         }
@@ -23,7 +27,7 @@ public class ArrayList {
         size++;
     }
 
-    public void addAtFront(String data){
+    public void addAtFront(T data){
         if(size == array.length){
             increaseSize();
         }
@@ -56,7 +60,7 @@ public class ArrayList {
     }
 
     private void increaseSize(){
-        String []newArray= new String[array.length * 2];
+        T []newArray= (T[])(new Object[array.length * 2]);
         for(int i=0; i<array.length; i++){
             newArray[i]=array[i];
         }
@@ -77,12 +81,12 @@ public class ArrayList {
         }
     }
     public void removeAll(){
-        String []newArray= new String[array.length];
+        T []newArray= (T[]) (new Object[array.length]);
         array=newArray;
         size=0;
     }
 
-    public void setAt(int index, String data){
+    public void setAt(int index, T data){
         if(index>0 && index<=array.length){
             if(size==0 || array[index-1]==null){
                 size++;
@@ -93,7 +97,7 @@ public class ArrayList {
         }
     }
 
-    public String getAt(int index){
+    public T getAt(int index){
         if(index>0 && index<=size){
             return array[index-1];
         }else {
@@ -102,7 +106,7 @@ public class ArrayList {
         return null;
     }
 
-    public void removeAllWithValue(String data){
+    public void removeAllWithValue(T data){
         for(int i=0;i<size;i++){
             if (Objects.equals(array[i],data)){
                 for(int j=i;j<size;j++){
@@ -116,5 +120,9 @@ public class ArrayList {
                 i--;
             }
         }
+    }
+
+    public ArrayListIterator<T> getIterator(){
+        return new ArrayListIterator<>( array);
     }
 }

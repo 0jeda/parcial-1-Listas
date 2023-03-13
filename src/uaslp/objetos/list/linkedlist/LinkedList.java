@@ -1,15 +1,17 @@
 package uaslp.objetos.list.linkedlist;
 
-import java.util.Objects;
+import uaslp.objetos.list.List;
 
-public class LinkedList {
-    private Node head;
-    private Node tail;
-    private int size;
+import java.util.*;
+
+public class LinkedList <T> implements List<T> {
+    private Node<T> head;
+    private Node<T> tail;
+    public int size;
 
 
-    public void addAtTail(String data){
-        Node newNodo= new Node();
+    public void addAtTail(T data){
+        Node<T> newNodo= new Node<>();
         newNodo.data=data;
         if(tail==null){
             head=newNodo;
@@ -22,8 +24,8 @@ public class LinkedList {
 
     }
 
-    public void addAtFront(String data){
-        Node newNodo= new Node();
+    public void addAtFront(T data){
+        Node<T> newNodo= new Node<>();
         newNodo.data=data;
         if(head==null){
             tail=newNodo;
@@ -46,7 +48,7 @@ public class LinkedList {
                 tail.next=null;
                 size--;
             }else if(size>2){
-                Node iterator=head.next;
+                Node<T> iterator=head.next;
                 int numberIterator=2;
                 do {
                     if(numberIterator==index){
@@ -77,9 +79,9 @@ public class LinkedList {
     public void showMeNames(){
         System.out.println(" ");
         if (head!=null) {
-            LinkedListIterator iterator=getIterator();
+            LinkedListIterator<T> iterator=getIterator();
             while (iterator.hasNext()){
-                String data=iterator.next();
+                Object data=iterator.next();
                 System.out.println(data);
             }
         }else {
@@ -87,14 +89,14 @@ public class LinkedList {
         }
     }
 
-    public void setAt(int index, String data){
+    public void setAt(int index, T data){
         if(index==1){
             head.data=data;
         } else if (index==size) {
             tail.data=data;
         }else if(size>2) {
             int numberIterator=2;
-            Node iterator=head.next;
+            Node<T> iterator=head.next;
             while(iterator!=null){
                 if(numberIterator==index){
                     iterator.data=data;
@@ -107,7 +109,7 @@ public class LinkedList {
         }
     }
 
-    public String getAt(int index){
+    public T getAt(int index){
         System.out.println(" ");
         if(index==1){
             return head.data;
@@ -115,19 +117,19 @@ public class LinkedList {
             return tail.data;
         }else if (size>2){
             int numberIterator=2;
-            LinkedListIterator iterator=getIterator();
+            LinkedListIterator<T> iterator=getIterator();
             while (iterator.hasNext()){
-                String data=iterator.next();
+                T data=iterator.next();
                 if(numberIterator==index){
                     return data;
                 }
                 numberIterator++;
             }
         }
-        return "Lo sentimos, el nodo no existe";
+        return ((T)"Lo sentimos, el nodo no existe");
     }
 
-    public void removeAllWithValue(String data){
+    public void removeAllWithValue(T data){
         if(Objects.equals(head.data, data)){
             head=head.next;
             head.previous=null;
@@ -137,7 +139,7 @@ public class LinkedList {
             tail.next=null;
             size--;
         }else if(size>2) {
-            Node iterator=head.next;
+            Node<T> iterator=head.next;
             while (iterator!=tail){
                 if(Objects.equals(iterator.data, data)){
                     iterator.previous.next=iterator.next;
@@ -153,7 +155,9 @@ public class LinkedList {
         return size;
     }
 
-    public LinkedListIterator getIterator(){
-        return new LinkedListIterator(head);
+    public LinkedListIterator<T> getIterator(){
+        return new LinkedListIterator<>(head);
     }
+
+
 }

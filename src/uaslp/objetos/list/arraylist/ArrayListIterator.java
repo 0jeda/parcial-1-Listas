@@ -1,9 +1,11 @@
 package uaslp.objetos.list.arraylist;
 
-public class ArrayListIterator {
-    private String []currentlist;
+import uaslp.objetos.list.Iterator;
+
+public class ArrayListIterator <T> implements Iterator<T> {
+    private T []currentlist;
     private int iterator;
-    ArrayListIterator(String []head){
+    ArrayListIterator(T []head){
         currentlist=head;
     }
 
@@ -11,8 +13,8 @@ public class ArrayListIterator {
         return currentlist[iterator+1]!=null;
     }
 
-    public String next(){
-        String selected= currentlist[iterator];
+    public T next(){
+        T selected= currentlist[iterator];
         iterator++;
         return selected;
     }

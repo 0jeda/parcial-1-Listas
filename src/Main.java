@@ -1,16 +1,24 @@
+import uaslp.objetos.list.List;
 import uaslp.objetos.list.arraylist.ArrayList;
 import uaslp.objetos.list.linkedlist.LinkedList;
 
 import javax.swing.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList lista= new ArrayList();
+        List<String> lista= new LinkedList<>();
         int condition=1;
-        String dato;
+        Object dato;
         int index;
 
+
+        lista.addAtTail("hola");
+        //lista.addAtTail(88);
+        //lista.addAtTail(new ArrayList<>());
+
+        /*
         while(condition>0) {
             Scanner teclado=new Scanner(System.in);
             System.out.println("¿Qué te gustaria hacer?\n");
@@ -33,7 +41,7 @@ public class Main {
                 case 3:
                     System.out.println("\nIngresa el numero del dato que deseas eliminar:");
                     index = teclado.nextInt();
-                    lista.remove(index);
+                    lista.remove((int) index);
                     break;
                 case 4:
                     System.out.println("\nIngresa el dato que deseas eliminar:");
@@ -49,12 +57,12 @@ public class Main {
                     dato = cadena.nextLine();
                     System.out.println("\nIngresa la posición:");
                     index = teclado.nextInt();
-                    lista.setAt(index, dato);
+                    lista.setAt((int) index, dato);
                     break;
                 case 7:
                     System.out.println("\nIngresa la posición:");
                     index = teclado.nextInt();
-                    dato=lista.getAt(index);
+                    dato=lista.getAt((int) index);
                     System.out.println("El dato obtenido es "+dato);
                     break;
                 case 8:
@@ -72,6 +80,6 @@ public class Main {
                     System.out.println("Ingresa una opcion valida");
                     break;
             }
-        }
+        }*/
     }
 }
