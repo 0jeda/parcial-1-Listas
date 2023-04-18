@@ -1,15 +1,15 @@
 package uaslp.objetos.list;
 
-import uaslp.objetos.list.linkedlist.LinkedListIterator;
 
-import java.util.Objects;
+import uaslp.objetos.list.exceptions.BadIndexException;
+import uaslp.objetos.list.exceptions.NotNullAllowedException;
 
 public interface List <T>{
-    void addAtTail(T data);
+    void addAtTail(T data) throws NotNullAllowedException;
 
-    void addAtFront(T data);
+    void addAtFront(T data) throws  NotNullAllowedException;
 
-    void remove(int index);
+    void remove(int index)throws BadIndexException;
 
     int getSize();
 
@@ -17,10 +17,10 @@ public interface List <T>{
     void showMeNames();
     void removeAll();
 
-    void setAt(int index, T data);
+    void setAt(int index, T data)throws NotNullAllowedException, BadIndexException;
 
 
-    T getAt(int index);
+    T getAt(int index)throws BadIndexException;
 
     void removeAllWithValue(T data);
 

@@ -3,8 +3,8 @@ package uaslp.objetos.list.arraylist;
 
 
 import uaslp.objetos.list.List;
-
-
+import uaslp.objetos.list.exceptions.BadIndexException;
+import uaslp.objetos.list.exceptions.NotNullAllowedException;
 import java.util.Objects;
 
 public class ArrayList <T> implements List<T>{
@@ -18,18 +18,24 @@ public class ArrayList <T> implements List<T>{
         array = (T[])(new Object[INITIAL_SIZE]);
     }
 
-    public void addAtTail(T data){
+    public void addAtTail(T data)throws NotNullAllowedException {
         if(size == array.length){
             increaseSize();
+        }
+        if(data == null){
+            throw new NotNullAllowedException();
         }
 
         array[size]=data;
         size++;
     }
 
-    public void addAtFront(T data){
+    public void addAtFront(T data)throws NotNullAllowedException{
         if(size == array.length){
             increaseSize();
+        }
+        if(data == null){
+            throw new NotNullAllowedException();
         }
         for(int i=size;i>0;i--){
             if(array[i-1]!=null) {
@@ -40,7 +46,7 @@ public class ArrayList <T> implements List<T>{
         size++;
     }
 
-    public void remove(int index){
+    public void remove(int index)throws BadIndexException {
         if(index>0 && index<=size){
             if(index==size) {
                 for (int i = index - 1; i < size - 1; i++) {
@@ -50,7 +56,7 @@ public class ArrayList <T> implements List<T>{
             array[size-1]=null;
             size--;
         }else {
-            System.out.println(" Lo siento, el indice no existe");
+            throw new BadIndexException();
         }
 
     }
@@ -61,9 +67,7 @@ public class ArrayList <T> implements List<T>{
 
     private void increaseSize(){
         T []newArray= (T[])(new Object[array.length * 2]);
-        for(int i=0; i<array.length; i++){
-            newArray[i]=array[i];
-        }
+        System.arraycopy(array, 0, newArray, 0, array.length);
         array=newArray;
 
     }
@@ -81,29 +85,31 @@ public class ArrayList <T> implements List<T>{
         }
     }
     public void removeAll(){
-        T []newArray= (T[]) (new Object[array.length]);
-        array=newArray;
+        array= (T[]) (new Object[array.length]);
         size=0;
     }
 
-    public void setAt(int index, T data){
+    public void setAt(int index, T data)throws BadIndexException, NotNullAllowedException{
         if(index>0 && index<=array.length){
             if(size==0 || array[index-1]==null){
                 size++;
             }
-            array[index-1]=data;
+            if(data == null){
+                throw new NotNullAllowedException();
+            }else {
+                array[index - 1] = data;
+            }
         }else {
-            System.out.println(" Lo siento, el indice no existe");
+            throw new BadIndexException();
         }
     }
 
-    public T getAt(int index){
+    public T getAt(int index)throws BadIndexException{
         if(index>0 && index<=size){
             return array[index-1];
         }else {
-            System.out.println(" Lo siento, el indice no existe");
+            throw new BadIndexException();
         }
-        return null;
     }
 
     public void removeAllWithValue(T data){

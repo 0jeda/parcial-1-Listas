@@ -1,6 +1,8 @@
 package uaslp.objetos.list.linkedlist;
 
 import uaslp.objetos.list.List;
+import uaslp.objetos.list.exceptions.BadIndexException;
+import uaslp.objetos.list.exceptions.NotNullAllowedException;
 
 import java.util.*;
 
@@ -10,7 +12,10 @@ public class LinkedList <T> implements List<T> {
     public int size;
 
 
-    public void addAtTail(T data){
+    public void addAtTail(T data)throws NotNullAllowedException {
+        if(data==null){
+            throw new NotNullAllowedException();
+        }
         Node<T> newNodo= new Node<>();
         newNodo.data=data;
         if(tail==null){
@@ -24,7 +29,10 @@ public class LinkedList <T> implements List<T> {
 
     }
 
-    public void addAtFront(T data){
+    public void addAtFront(T data)throws NotNullAllowedException{
+        if(data==null){
+            throw new NotNullAllowedException();
+        }
         Node<T> newNodo= new Node<>();
         newNodo.data=data;
         if(head==null){
@@ -37,7 +45,7 @@ public class LinkedList <T> implements List<T> {
         size++;
     }
 
-    public void remove(int index){
+    public void remove(int index)throws BadIndexException {
         if(index<=size){
             if(index==1){
                 head=head.next;
@@ -61,7 +69,7 @@ public class LinkedList <T> implements List<T> {
                 }while (iterator.next!=null);
                 }
             }else {
-                System.out.println("Lo sentimos, el nodo no existe");
+               throw new BadIndexException();
 
         }
     }
@@ -89,7 +97,11 @@ public class LinkedList <T> implements List<T> {
         }
     }
 
-    public void setAt(int index, T data){
+    public void setAt(int index, T data)throws NotNullAllowedException, BadIndexException{
+        if(data==null){
+            throw new NotNullAllowedException();
+        }
+
         if(index==1){
             head.data=data;
         } else if (index==size) {
@@ -105,11 +117,11 @@ public class LinkedList <T> implements List<T> {
                 iterator=iterator.next;
             }
         }else{
-            System.out.println("Lo sentimos, el nodo no existe.");
+            throw new BadIndexException();
         }
     }
 
-    public T getAt(int index){
+    public T getAt(int index)throws BadIndexException{
         System.out.println(" ");
         if(index==1){
             return head.data;
@@ -125,8 +137,10 @@ public class LinkedList <T> implements List<T> {
                 }
                 numberIterator++;
             }
+        }else {
+            throw new BadIndexException();
         }
-        return ((T)"Lo sentimos, el nodo no existe");
+        return (T) "Lo sentimos";
     }
 
     public void removeAllWithValue(T data){
