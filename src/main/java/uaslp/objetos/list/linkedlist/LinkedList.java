@@ -49,7 +49,9 @@ public class LinkedList <T> implements List<T> {
         if(index<=size){
             if(index==1){
                 head=head.next;
-                head.previous=null;
+                if(head != null){
+                    head.previous=null;
+                }
                 size--;
             }else if(index==size){
                 tail=tail.previous;
@@ -121,7 +123,7 @@ public class LinkedList <T> implements List<T> {
         }
     }
 
-    public T getAt(int index)throws BadIndexException{
+    public T getAt(int index){
         System.out.println(" ");
         if(index==1){
             return head.data;
@@ -137,8 +139,6 @@ public class LinkedList <T> implements List<T> {
                 }
                 numberIterator++;
             }
-        }else {
-            throw new BadIndexException();
         }
         return (T) "Lo sentimos";
     }
