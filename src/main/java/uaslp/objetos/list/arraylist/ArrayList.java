@@ -48,7 +48,7 @@ public class ArrayList <T> implements List<T>{
 
     public void remove(int index)throws BadIndexException {
         if(index>0 && index<=size){
-            if(index==size) {
+            if(index<=size) {
                 for (int i = index - 1; i < size - 1; i++) {
                     array[i] = array[i + 1];
                 }
